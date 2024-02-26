@@ -1,0 +1,47 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f7f7f7;
+}
+
+.container {
+    max-width: 800px;
+}
+
+.accordion-button {
+    background-color: #17a2b8;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+}
+
+.accordion-button:hover {
+    background-color: #17a2b8;
+}
+
+.accordion-collapse {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.accordion-collapse.show {
+    border: 1px solid #17a2b8;
+    box-shadow: 0 0 15px rgba(0, 123, 255, 0.2);
+}
+
+.accordion-header button::after {
+    content: '\f078';
+    font-family: 'Font Awesome 5 Free';
+    float: right;
+}
+
+.accordion-header button[aria-expanded="true"]::after {
+    content: '\f077';
+}

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabo Checkout</title>
+    <link rel="stylesheet" href="css/checkout1.css">
+
+    <!--ADD POPPINS FONT-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+    <link href="img/icons8-checkout-50.png" rel="icon" type="image/x-icon">
+</head>
+
+<body>
+
+    <header class="mb-3">
+        <div class="container-fluid bg-info">
+            <div class="row align-items-center ">
+                <div class="col-4 col-xl-1 col-lg-2 col-md-2 col-sm-2">
+                    <h5><a href="/main" class="text-center text-white fw-bold fs-1 mr-1">TABO</a></h5>
+                </div>
+    
+                <div class="col-6 col-xl-6 col-lg-6 col-3 col-md-3 col-sm-3">
+                    <nav class="navbar navbar-expand-lg justify-content-center align-items-center">
+                        <ul class="nav navbar-nav align-items-center">
+                            <li class="nav-item">
+                                <h5><a class="nav-link mx-2 active text-white fw-bold fs-3" href="/main">Home</a></h5>
+                            </li>
+                            <li class="nav-item px-3">
+                                <h5><a class="nav-link mx-2 active text-white fw-bold fs-3" href="/shop">Shop</a></h5>
+                            </li>
+                            <li class="nav-item pr-3">
+                                <h5><a class="nav-link mx-2 active text-white fw-bold fs-3" href="/brands">Brands</a></h5>
+                            </li>
+                            <li class="nav-item pr-3">
+                                <h5><a class="nav-link mx-2 active text-white fw-bold fs-3" href="/contacts">Contact</a></h5>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+    
+                <div class="col-12 col-xl-4 col-lg-3 col-sm-6 col-md-6 ">
+                    <div class="row align-items-center justify-content-center icon-row">
+                        <% if (adminStatus) { %>
+                            <div class="col-3"><a class="text-dark " href="/admin" target="blank"><i class="fa-solid fa-circle-info fa-2x" aria-hidden="true"></i></a></div>
+                            <% } %> 
+                        <div class="col-3"><a class="text-dark " href="/cart" target="blank"><i class="fa-solid fa-shopping-cart fa-2x" aria-hidden="true"></i></a></div>
+                        
+                        <div class="col-3 d-flex flex-column align-items-center">
+                            <form action="/signout" method="post">
+                                <button type="submit" class="btn signOut"><i class="fa-solid fa-arrow-right-from-bracket fa-2x"></i></button>
+                              </form>
+                        </div>
+                        
+                        <div class="col-3 d-flex flex-column align-items-center">
+                            <i class="fa fa-user fa-2x" aria-hidden="true"></i>
+                            <% if (username) { %>
+                            <span class="text-center"><%= username %></span>
+                            <% } %>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div id="box" style="border-radius: 19px;margin: 0 auto;margin-top: 7%;">
+        <div style="background-color: rgb(54, 148, 236);border-top-right-radius: 19px;border-bottom-right-radius: 19px;width: 50%;"
+            id="item2">
+            <table style="line-height: 30px; padding-right: 5%;margin-left: 2%;" id="t2">
+                <form>
+                    <tr>
+                        <td>
+                            <label style="color:whitesmoke; font-weight: 600;">
+                                Please select your card:
+                            </label></td>
+                        <td>
+                            <select style="height: 28px; width: 100%; text-align-last:center; background-color:rgb(91, 177, 253); border: none;color: white; outline: none;"id="selectBox" onchange="changeFunc()">
+                                <option>
+                                    Kaspi
+                                </option>
+                                <option>
+                                    Visa
+                                </option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr style="height: 120px;">
+                        <td colspan="2"><img id="cardlogo" src="img/kaspi.png"
+                                style="height: 70px;display: block;margin:0 auto;"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <label style="color:whitesmoke;font-weight: 600;">Card Number</label><br />
+                            <input type="number"
+                                style="height: 30px;width: 100%;background-color:rgb(91, 177, 253);border: none;color: white;outline: none;"
+                                id="card" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <label style="color:whitesmoke;font-weight: 600;">Card Holder</label><br />
+                            <input type="text"
+                                style="height: 30px;width: 100%;background-color:rgb(91, 177, 253);border: none;color: white;outline: none;" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 50%;">
+                            <label style="color:whitesmoke;font-weight: 600;">Expires</label><br>
+                            <input type="date"
+                                style="height: 30px;width: 100%;background-color:rgb(91, 177, 253);border: none;color: white;outline: none;" />
+                        </td>
+                        <td style="width:50% ;padding-left: 20px;">
+                            <label style="color:whitesmoke;font-weight: 600;">CVC</label><br>
+                            <input type="number"
+                                style="height: 30px;width: 100%;background-color:rgb(91, 177, 253);border: none;color: white;outline: none;" />
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td colspan="2" style="padding-top: 70px;padding-bottom: 10px;" id="td-button">
+                            <a href="#"  class="btn hvr-right" onclick= "check();">Checkout</a>
+                        </td>
+                        <div id="popup-modal" class="modal">
+                            <div class="modal-content animated bounce">
+                                <a class="modal-close">×</a>
+                            <div class="modal-text">
+                                <h2>Thank you for shopping with us!</h2>
+                                <p>Your order has been placed successfully. Soon you will receive your tracking ID on your email.</p>
+                            </div>
+                        </div>
+                    </tr>
+                </form>
+            </table>
+        </div>
+        </tr>
+
+
+    </div>
+
+
+    <footer class="bg-light text-dark mt-5">
+        <div class="container p-4">
+            <div class="row">
+                <div class="col-lg-6 col-md-12 mb-4">
+                    <h5 class="mb-3 text-dark">About Our Shop</h5>
+                    <p>
+                        Welcome to TABO SHOP! We offer a wide range of high-quality products to meet your fashion needs. Explore our collection and find the perfect items for your style.
+                    </p>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="mb-3 text-dark">Links</h5>
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-1">
+                            <a href="/faq" style="color: #4f4f4f;">FAQ</a>
+                        </li>
+                      
+                        <li class="mb-1">
+                            <a href="/brands" style="color: #4f4f4f;">Collabarations</a>
+                        </li>
+                        <li>
+                            <a href="/contacts" style="color: #4f4f4f;">Contact us</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="mb-1 text-dark">Opening Hours</h5>
+                    <table class="table" style="border-color: #666;">
+                        <tbody>
+                            <tr>
+                                <td>Mon - Fri:</td>
+                                <td>8am - 9pm</td>
+                            </tr>
+                            <tr>
+                                <td>Sat - Sun:</td>
+                                <td>8am - 1am</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2023 TABO SHOP
+        </div>
+    </footer>
+</body>
+<script src="js/checkout1.js"></script>
+
+</html>
+
+

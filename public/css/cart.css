@@ -1,0 +1,57 @@
+strike {
+    color: red;
+    margin-right: 10px;
+}
+
+    h1 {
+        margin-left: 30px;
+    }
+         h2 {
+            text-shadow: 6px 6px 10px rgb(37, 202, 247);
+            font-weight: bolder;
+            transition: 0.5s;
+            
+        }
+        h2:hover{
+        -webkit-text-stroke: 2px #050505eb;
+        color:transparent;
+        }
+       
+        
+        .products .card {
+            height: 100%;
+        }
+        
+        .products .card-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+        
+        .products .card-text {
+            margin-bottom: 10px;
+        }
+        
+        .products .btn {
+            width: 100%;
+        }
+        h5:hover{
+        -webkit-text-stroke: 1px #fff;
+        transform: translateY(-5px);
+        transition: 1s;
+        }
+
+        p {
+            text-shadow: 6px 6px 10px rgba(0, 0, 0, 0.5);
+            font-weight: bolder;
+        }
+        .container:hover{
+        transform: translateY(-10px);
+        transition: 1s;
+        }
+        .cart-footer {
+    background-color: #f5f5f5;
+}
+
+.cart-footer p {
+    font-size: 18px;
+}

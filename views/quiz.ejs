@@ -1,0 +1,342 @@
+<% const quizQuestionsJSON = JSON.stringify(quizQuestions); %>
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Toyota</title>
+    <link rel="icon" type="image/x-icon" href="myicon.ico" />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/navbar.css" />
+    <link rel="stylesheet" href="css/footer.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&family=Open+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/quiz.css" />
+  </head>
+  <body>
+    <!--Navbar-->
+    <header class="mb-3">
+      <div class="container-fluid bg-info">
+        <div class="row align-items-center">
+          <div class="col-4 col-xl-1 col-lg-2 col-md-2 col-sm-2">
+            <h5>
+              <a href="/main" class="text-center text-white fw-bold fs-1 mr-1"
+                >TABO</a
+              >
+            </h5>
+          </div>
+
+          <div class="col-6 col-xl-6 col-lg-6 col-3 col-md-3 col-sm-3">
+            <nav
+              class="navbar navbar-expand-lg justify-content-center align-items-center"
+            >
+              <ul class="nav navbar-nav align-items-center">
+                <li class="nav-item">
+                  <h5>
+                    <a
+                      class="nav-link mx-2 active text-white fw-bold fs-3"
+                      href="/main"
+                      >Home</a
+                    >
+                  </h5>
+                </li>
+                <li class="nav-item px-3">
+                  <h5>
+                    <a
+                      class="nav-link mx-2 active text-white fw-bold fs-3"
+                      href="/shop"
+                      >Shop</a
+                    >
+                  </h5>
+                </li>
+                <li class="nav-item pr-3">
+                  <h5>
+                    <a
+                      class="nav-link mx-2 active text-white fw-bold fs-3"
+                      href="/brands"
+                      >Brands</a
+                    >
+                  </h5>
+                </li>
+                <li class="nav-item pr-3">
+                  <h5>
+                    <a
+                      class="nav-link mx-2 active text-white fw-bold fs-3"
+                      href="/contacts"
+                      >Contact</a
+                    >
+                  </h5>
+                </li>
+              </ul>
+            </nav>
+          </div>
+
+          <div class="col-12 col-xl-4 col-lg-3 col-sm-6 col-md-6">
+            <div class="row align-items-center justify-content-center icon-row">
+              <% if (adminStatus) { %>
+              <div class="col-3">
+                <a class="text-dark" href="/admin" target="blank">
+                  <i
+                    class="fa-solid fa-circle-info fa-2x"
+                    aria-hidden="true"
+                  ></i>
+                </a>
+              </div>
+              <% } %>
+              <div class="col-3">
+                <a class="text-dark" href="/cart" target="blank">
+                  <i
+                    class="fa-solid fa-shopping-cart fa-2x"
+                    aria-hidden="true"
+                  ></i>
+                </a>
+              </div>
+
+              <div class="col-3 d-flex flex-column align-items-center">
+                <form action="/signout" method="post">
+                  <button type="submit" class="btn signOut">
+                    <i class="fa-solid fa-arrow-right-from-bracket fa-2x"></i>
+                  </button>
+                </form>
+              </div>
+
+              <div class="col-3 d-flex flex-column align-items-center">
+                <i class="fa fa-user fa-2x" aria-hidden="true"></i>
+                <% if (username) { %>
+                <span class="text-center"><%= username %></span>
+                <% } %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="container">
+      <h1 class="text-center my-4">Tabo Quiz</h1>
+
+      <!-- Quiz Questions -->
+      <div id="quiz">
+        <% quizQuestions.forEach((question, index) => { %>
+        <div class="question">
+          <h3><%= question.question[locale] %></h3>
+          <form
+            id="questionForm<%= index %>"
+            class="question-form"
+            data-correct-answer="<%= question.correctAnswerIndex %>"
+          >
+            <% question.options.forEach((option, optionIndex) => { %>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="question<%= index %>"
+                id="option<%= index %><%= optionIndex %>"
+                value="<%= optionIndex %>"
+              />
+              <label
+                class="form-check-label"
+                for="option<%= index %><%= optionIndex %>"
+              >
+                <%= option[locale] %>
+              </label>
+            </div>
+            <% }); %>
+          </form>
+        </div>
+        <% }); %>
+      </div>
+
+      <!-- Timer -->
+      <div id="timer" class="text-center text-danger my-4">
+        <span id="timeDisplay">05:00</span>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="text-center">
+        <button id="submitBtn" class="btn btn-danger">Submit Quiz</button>
+      </div>
+      <br /><br />
+
+      <!-- Result Modal -->
+      <div
+        class="modal fade"
+        id="resultModal"
+        tabindex="-1"
+        aria-labelledby="resultModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="resultModalLabel">
+                Quiz Result Summary
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+            
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body" id="resultBody">
+              <!-- Result content will be displayed here -->
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-primary"
+                id="shareFacebookBtn"
+              >
+                Share on Facebook
+              </button>
+              <button type="button" class="btn btn-info" id="shareTwitterBtn">
+                Share on Twitter
+              </button>
+              <button
+          type="button"
+          class="btn btn-danger"
+          data-bs-dismiss="modal"
+          id="closeAndRedirectBtn"
+        >
+          Close
+        </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+      <script
+        src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        crossorigin="anonymous"
+      ></script>
+      <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"
+      ></script>
+      <script>
+        const timerDisplay = document.getElementById("timeDisplay");
+        let timeLeft = 300; // 5 minutes in seconds
+        let score;
+        let timeTaken; // Variable to store the time taken
+      
+        function updateTimer() {
+          const minutes = Math.floor(timeLeft / 60);
+          const seconds = timeLeft % 60;
+          timerDisplay.textContent = `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+        }
+      
+        function countdown() {
+          updateTimer();
+          const countdownInterval = setInterval(() => {
+            if (timeLeft <= 0) {
+              clearInterval(countdownInterval);
+              submitQuiz();
+            } else {
+              timeLeft--;
+              updateTimer();
+            }
+          }, 1000);
+        }
+      
+        countdown();
+      
+        document.getElementById("submitBtn").addEventListener("click", function() {
+          submitQuiz();
+        });
+      
+        function submitQuiz() {
+          const userResponses = [];
+          const correctAnswers = [];
+          const forms = document.querySelectorAll(".question-form");
+          forms.forEach((form, index) => {
+            const selectedOption = form.querySelector(
+              "input[name=question" + index + "]:checked"
+            );
+            if (selectedOption) {
+              userResponses.push(parseInt(selectedOption.value));
+              correctAnswers.push(parseInt(form.dataset.correctAnswer));
+            }
+          });
+      
+          score = 0;
+          for (let i = 0; i < userResponses.length; i++) {
+            if (userResponses[i] === correctAnswers[i]) {
+              score++;
+            }
+          }
+      
+          // Calculate time taken
+          timeTaken = 300 - timeLeft;
+      
+          displayResultModal(userResponses, score);
+        }
+      
+        function displayResultModal(userResponses, score) {
+          const resultBody = document.getElementById("resultBody");
+          resultBody.innerHTML = "<h5>Your Quiz Result:</h5>";
+          userResponses.forEach((response, index) => {
+            resultBody.innerHTML += `<p>Question ${index + 1}: Option ${
+              response + 1
+            }</p>`;
+          });
+          resultBody.innerHTML += `<p>Your Score: ${score} / ${userResponses.length}</p>`;
+          resultBody.innerHTML += `<p>Time Taken: ${formatTime(timeTaken)} seconds</p>`; // Display time taken
+      
+          $("#resultModal").modal("show");
+        }
+      
+        function formatTime(seconds) {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    const formattedMinutes = minutes < 10 ? "0" + minutes : minutes;
+    const formattedSeconds = remainingSeconds < 10 ? "0" + remainingSeconds : remainingSeconds;
+    return `${formattedMinutes}:${formattedSeconds}`;
+  }
+
+  document.getElementById("shareFacebookBtn").addEventListener("click", function() {
+    const quizUrl = "https://example.com/quiz";
+    const message = `I scored ${score} out of ${10} in the quiz and completed it in ${formatTime(timeTaken)}!`;
+    const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+      quizUrl
+    )}&quote=${encodeURIComponent(message)}`;
+    window.open(facebookUrl, "_blank");
+  });
+
+  // Function to share quiz on Twitter
+  document.getElementById("shareTwitterBtn").addEventListener("click", function() {
+    const quizUrl = "https://example.com/quiz";
+    const message = `I scored ${score} out of ${10} in the quiz and completed it in ${formatTime(timeTaken)}!`;
+    const twitterUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(
+      quizUrl
+    )}&text=${encodeURIComponent(message)}`;
+    window.open(twitterUrl, "_blank");
+  });
+
+  document.getElementById("closeAndRedirectBtn").addEventListener("click", function() {
+    window.location.href = "/main"; // Redirect to /main
+  });
+      </script>
+      
+  </body>
+</html>

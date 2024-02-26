@@ -1,0 +1,19 @@
+.container-fluid:hover{
+    transform: translateY(-10px);
+transition: 1s;
+}
+.label{
+cursor: pointer;
+}
+
+.countdown-container {
+    margin-left: 50px;
+    margin-bottom: 20px;
+}
+
+.filters{
+padding-left: 50px;
+}
+.countdown-container{
+color: rgb(6, 138, 168);
+}

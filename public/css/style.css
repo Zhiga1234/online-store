@@ -1,0 +1,47 @@
+@font-face {
+    font-family: 'Playfair Display'; 
+        src: url('fonts/playfair-display-v36-latin-700.woff2') format('woff2'),
+        url('fonts/playfair-display-v36-latin-regular.woff2') format('woff2'),
+        url('fonts/playfair-display-v36-latin-900.woff2') format('woff2');
+;
+}
+
+body {
+    font-family: "Playfair Display",sans-serif;
+}
+
+
+
+  .btn {
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    margin-left: 10px;
+    margin-right: 10px;
+
+  }
+  
+  
+  
+  .btn:hover {
+    background-color: #0056b3;
+  }
+  
+  #text {
+    font-size: 20px;
+  }
+  
+.col-4 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.col-4 img:hover {
+    transform: scale(1.1);
+}
+.col-4 p {
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: bold;
+}
+

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/checkout.css">
+
+</head>
+<body>
+    <div class="container">
+        <h1>Checkout</h1>
+        <div class="checkout-details">
+            <p>Total Price: <span id="total-price"></span> &euro;</p>
+        </div>
+        <button class="checkout-btn" onclick="checkout()">Checkout</button>
+    </div>
+    
+    <script>
+        document.getElementById('total-price').textContent = localStorage.getItem('totalPrice') || '0'; // Set the total price from local storage
+        function checkout() {
+            const totalPrice = localStorage.getItem('totalPrice') || '0';
+            alert(`Total Price: ${totalPrice} €`); // Show alert with total price
+            // You might want to perform further actions here like redirecting to a payment gateway or processing the order
+        }
+    </script>
+</body>
+</html>

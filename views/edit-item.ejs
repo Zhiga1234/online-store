@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toyota</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <div style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
+
+        <div>
+            <a href="/item-changing" class="btn btn-danger" style="margin-bottom: 3rem;margin-top: 1rem;">Go back to item Infos</a>
+        </div>
+      </div>
+    <div class="container">
+        <h1 class="text-center mb-5">Edit item</h1>
+        <form action="/edit-item/<%= item._id %>" method="POST">
+            <div class="mb-3">
+                <label for="name_en" class="form-label">Name (English):</label>
+                <input type="text" class="form-control" id="name_en" name="name_en" value="<%= item.name.en %>" required>
+            </div>
+            <div class="mb-3">
+                <label for="name_ru" class="form-label">Name (Russian):</label>
+                <input type="text" class="form-control" id="name_ru" name="name_ru" value="<%= item.name.ru %>" required>
+            </div>
+            <div class="mb-3">
+                <label for="description_en" class="form-label">Description (English):</label>
+                <input type="text" class="form-control" id="description_en" name="description_en" value="<%= item.description.en %>" required>
+            </div>
+            <div class="mb-3">
+                <label for="description_ru" class="form-label">Description (Russian):</label>
+                <input type="text" class="form-control" id="description_ru" name="description_ru" value="<%= item.description.ru %>" required>
+            </div>
+            <div class="mb-3">
+                <label for="pictureUrl" class="form-label">Picture URL:</label>
+                <input type="text" class="form-control" id="pictureUrl" name="pictureUrl" value="<%= item.pictureUrl %>" required>
+            </div>
+            <button type="submit" class="btn btn-danger" style="margin-bottom: 3rem;">Save Changes</button>
+        </form>
+    </div>
+</body>
+</html>
