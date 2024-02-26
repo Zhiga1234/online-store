@@ -21,7 +21,7 @@
         document.getElementById('total-price').textContent = localStorage.getItem('totalPrice') || '0'; // Set the total price from local storage
         function checkout() {
             const totalPrice = localStorage.getItem('totalPrice') || '0';
-            alert(`Total Price: ${totalPrice} €`); // Show alert with total price
+            alert(`Total Price: ${totalPrice} €`); 
             // You might want to perform further actions here like redirecting to a payment gateway or processing the order
         }
     </script>
