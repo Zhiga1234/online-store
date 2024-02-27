@@ -42,6 +42,9 @@ deletion. Administrators have the ability to edit, delete, and add these items.
 ## Bonus Task
 One user has only 1 chance to pass the quiz!
 
-1. Timed Quizzes (
-2. Social Sharing: Facebook , Twitter 
+1. Timed Quizzes (The quiz is given 5 minutes) (10 questions)
+2. Social Sharing: Facebook , Twitter
+
+
+
 
