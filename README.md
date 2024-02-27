@@ -2,6 +2,7 @@
 
 Welcome to TABO Online Clothes Shop! This is an e-commerce platform where you can browse and purchase a wide variety of clothes.
 
+Heroku :  https://online-shopstore-5bfda6c3e26e.herokuapp.com/shop
 
 ## Admin Panel 
 
